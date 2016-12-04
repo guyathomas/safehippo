@@ -18,6 +18,13 @@ git clone https://github.com/<INSERT YOUR GITHUB USERNAME HERE>/giddygoats.git
 
 Install Dependancies with `npm install`
 
+Create a file called `env.js` in the root directory of this repo with the following structure:
+```
+process.env.SAFE_HIPPO_TWILIO_ACCOUNT_SID = 'YOUR_TWILIO_ACCOUNT_SID', 
+process.env.SAFE_HIPPO_TWILIO_ACCOUNT_AUTH_TOKEN = 'YOUR_TWILIO_ACCOUNT_AUTH_TOKEN', 
+process.env.SAFE_HIPPO_GOOGLE_MAPS_KEY = 'YOUR_GOOGLE_MAPS_API_KEY'
+```
+
 Start MongoDB with `mongod`
 
 Start Redis with `redis-server`
