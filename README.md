@@ -63,3 +63,56 @@ git push origin master
 - Each developer on the team has a branch titled that developers name. As of 31st Oct 2016, Guy Thomas administers the account. Email guythomas721@gmail.com and ask him to create a branch for you.
 
 - Submit a pull request to your branch. After a code review, your new feature can be merged into the main repo! 
+
+## Getting Up & Running
+
+Install Dependancies with `npm install`
+
+Start MongoDB with `mongod`
+
+Start Redis with `redis-server`
+
+Start the server with `npm start`
+
+
+## API USAGE
+
+The safest route between two points in San Francisco
+
+**Request:**
+Make a GET request to `https://www.safehippo.com/safestRoute` with the following parameters
+
+* *Mandatory* *
+```
+originLat \\ The latitude of the origin (i.e. 37.7764084)
+originLon \\ The longitude of the origin (i.e. -122.40834870000003)
+destLat \\ The latitude of the destination (i.e 37.7836883)
+destLon \\ The longitude of the desitination (i.e. -122.40898400000003)
+```
+
+This will produce a URL that looks something like 
+```
+https://safehippo.com/safestRoute?originLat=37.7765056&originLon=-122.40838450000001&destLat=37.7836883&destLon=-122.40898400000003
+```
+
+* *Optional* *
+By specifying a mobile phone, an SMS will be sent to the client in the format "Oink Oink, here is the safest way home: https://goo.gl/3tJ0D0"
+```
+mobile \\ The mobile number for the safest route to be sent to
+```
+This will produce a URL that looks something like 
+```
+https://safehippo.com/safestRoute?originLat=37.7765056&originLon=-122.40838450000001&destLat=37.7836883&destLon=-122.40898400000003&mobile=+16282024506
+```
+
+**Response:**
+Following the above guidlines will yield a response as seen below.
+url: The long url which will provide turn by turn directions in google maps
+shortURL: The shortened URL for `url`
+waypoints: The coordinates of each turn along the route
+```
+{url: "https://www.google.com/maps?saddr=37.7764379,-122.4082783&daddr=37.77676659999999,-122.4078552+to:37.7804776,-122.4125511+to:37.7832203,-122.4090909+to:37.7836636,-122.4091892&dirflg=w",
+shortURL: "https://goo.gl/512tc2",
+waypoints:[{"lat":37.7766427,"lng":-122.4080099},{"lat":37.77676659999999,"lng":-122.4078552},{"lat":37.7804776,"lng":-122.4125511},{"lat":37.7832203,"lng":-122.4090909},{"lat":37.7836636,"lng":-122.4091892}]
+}
+```

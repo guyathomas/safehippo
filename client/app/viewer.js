@@ -89,6 +89,7 @@ angular.module('app.controllers', [])
     if (mobile) {
       locationURL += ('&mobile=' + mobile)
     }
+    console.log(locationURL)
     
 
     fetch(locationURL)
@@ -96,6 +97,7 @@ angular.module('app.controllers', [])
       return route.json();
     })
     .then(function(jsonRoute) {
+      console.log(jsonRoute)
       $scope.safeRoute = jsonRoute
       $scope.renderRoute($scope.safeRoute.waypoints);
       $scope.$apply();
