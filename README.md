@@ -4,7 +4,7 @@
 
 > By crunching real time crime data, Safe Hippo will SMS you the safest route home.
 
-# Web Client
+## Web Client
 <img src='http://res.cloudinary.com/dqvlfpaev/image/upload/v1480878958/SafeHippo%20Client.png'/>
 
 ## Getting Up & Running
@@ -29,7 +29,7 @@ Start the server with `npm start`
 
 The safest route between two points in San Francisco
 
-# Request:
+### Request:
 Make a GET request to `https://www.safehippo.com/safestRoute` with the following parameters
 
 **Mandatory**
@@ -57,7 +57,7 @@ This will produce a URL that looks something like
 https://safehippo.com/safestRoute?originLat=37.7765056&originLon=-122.40838450000001&destLat=37.7836883&destLon=-122.40898400000003&mobile=+16282024506
 ```
 
-# Response:
+### Response:
 Following the above guidlines will yield a response as seen below.
 url: The long url which will provide turn by turn directions in google maps
 shortURL: The shortened URL for `url`
