@@ -2,7 +2,7 @@
 
 # Safe Hippo
 
-> By crunching real time crime data, Safe Hippo will SMS you the safest route home.
+> By crunching real time crime data, Safe Hippo will provide google maps directions of the safest route from point A to point B. It can optionally send these details via SMS.
 
 ## Web Client
 <img src='http://res.cloudinary.com/dqvlfpaev/image/upload/v1480878958/SafeHippo%20Client.png'/>
