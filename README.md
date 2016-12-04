@@ -47,6 +47,7 @@ https://safehippo.com/safestRoute?originLat=37.7765056&originLon=-122.4083845000
 
 
 **Optional**
+
 By specifying a mobile phone, an SMS will be sent to the client in the format "Oink Oink, here is the safest way home: https://goo.gl/3tJ0D0"
 ```
 mobile \\ The mobile number for the safest route to be sent to
@@ -79,7 +80,7 @@ waypoints:[{"lat":37.7766427,"lng":-122.4080099},{"lat":37.77676659999999,"lng":
     * Our database contains every recoreded crime that occured in San Francisco in 2015 with it's latitude and longitude. We populated the DB with data from the SF OpenData API at this endpoint: https://data.sfgov.org/resource/ritf-b9ki.json. For each waypoint on a given route, we query the db to see how many crimes happen within 80 metres of that waypoint. Each waypoint has a crime score equal to how many crimes happened near that point. We then sum up how many crimes happened on each route - each route's score is the sum of all the waypoint's crime score on that route. We then return the route with the lowest crime score. This will be the route where the fewest recorded crimes have occured over the past year.
   - We then SMS the provided mobile number the Google Maps URL of the safest route using Twilio's API
   - We return an object back to the client which contains all the waypoints of the safest route as well as the Google Maps URL.
-  
+
 ## Team
 
   - __Product Owner__: Sam Henderson
