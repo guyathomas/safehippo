@@ -96,6 +96,7 @@ angular.module('app.controllers', [])
       return route.json();
     })
     .then(function(jsonRoute) {
+      console.log(JSON.stringify(jsonRoute))
       $scope.safeRoute = jsonRoute
       $scope.renderRoute($scope.safeRoute.waypoints);
       $scope.$apply();
