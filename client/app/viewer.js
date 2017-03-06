@@ -8,6 +8,8 @@ angular.module('app.controllers', [])
   $scope.safeRoute;
   $scope.originCoords = {};
   $scope.destinationCoords = {};
+  $scope.originVicinity = '';
+  $scope.destinationVicinity = '';
 
   $scope.renderRoute = (points) => {
     const safeRoute = new google.maps.Polyline({
@@ -31,12 +33,20 @@ angular.module('app.controllers', [])
 
   $scope.setPos = (currentPosition) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentPosition.lat},${currentPosition.lng}&key=AIzaSyBgXiNUqN5OlBHE7hAVxV9phqHQrfKldXw`;
-    
+
     fetch(url)
     .then(addressData => addressData.json())
     .then((addressDataJSON) => {
       const longAddress = addressDataJSON.results[0].formatted_address;
       const arrSplit = longAddress.split(',');
+  
+      //Determine the auto generated start location
+      addressDataJSON.results[0].address_components.forEach((addressData) => {
+        if (addressData.types[0] === 'locality' || addressData.types[1] === 'locality') {
+          $scope.pos = originVicinity;
+          console.log('Found it!', locality);
+        }
+      });
 
       shortAddress = `${arrSplit[0]},${arrSplit[1]}`;
       currentPosition.address = shortAddress;

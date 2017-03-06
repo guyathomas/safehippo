@@ -21,24 +21,31 @@ function initAutocomplete() {
      {types: ['geocode']});
 
    // origin.addListener('place_changed', setAddress)
-   origin.addListener('place_changed', setOrigin)
-   destination.addListener('place_changed', setDestination)
+   origin.addListener('place_changed', setOrigin);
+   destination.addListener('place_changed', setDestination);
  }
 
  function setDestination() {
   var place = destination.getPlace();
-  var scope = angular.element(document.querySelector('[ng-controller="ViewController"]')).scope()
+  var scope = angular.element(document.querySelector('[ng-controller="ViewController"]')).scope();
 
-  scope.destinationCoords.lat = place.geometry.location.lat()
-  scope.destinationCoords.lng = place.geometry.location.lng()
+  scope.destinationVicinity = place.vicinity;
+  scope.destinationCoords.lat = place.geometry.location.lat();
+  scope.destinationCoords.lng = place.geometry.location.lng();
 };
 
  function setOrigin() {
   var place = origin.getPlace();
-  var scope = angular.element(document.querySelector('[ng-controller="ViewController"]')).scope()
+  var scope = angular.element(document.querySelector('[ng-controller="ViewController"]')).scope();
 
-  scope.originCoords.lat = place.geometry.location.lat()
-  scope.originCoords.lng = place.geometry.location.lng()
+  scope.originVicinity = place.vicinity;
+
+  if (scope.originVicinity != 'San Francisco') {
+    console.log('Origin vicinity is not SF')
+  }
+  console.log('place.geometry.location', place)
+  scope.originCoords.lat = place.geometry.location.lat();
+  scope.originCoords.lng = place.geometry.location.lng();
 };
 
 
@@ -48,7 +55,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: {lat: 37.775, lng: -122.434},
-    mapTypeId: 'roadmap'
+    mapTypeId: 'roadmap',
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -57,15 +64,15 @@ function initMap() {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude
+        lng: position.coords.longitude,
       };
 
-      var circle = new google.maps.Circle({
-        center: pos,
-        radius: position.coords.accuracy
-      });
-      origin.setBounds(circle.getBounds());
-      destination.setBounds(circle.getBounds());
+      // var circle = new google.maps.Circle({
+      //   center: pos,
+      //   radius: position.coords.accuracy,
+      // });
+      // origin.setBounds(circle.getBounds());
+      // destination.setBounds(circle.getBounds());
 
       angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().setPos(pos);
       angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().originCoords = pos;
@@ -91,13 +98,13 @@ function initMap() {
         mapPoints.push(new google.maps.LatLng(crimePoints[i][1], crimePoints[i][0]));
       }
 
-      return mapPoints
+      return mapPoints;
     })
       .then(function(mapPoints) {
         //Create the heatmap from the array created in the previous step
         heatmap = new google.maps.visualization.HeatmapLayer({
           data: mapPoints,
-          map: map
+          map: map,
         });
         angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().flipMapLoaded();
       })
@@ -122,12 +129,12 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 function renderHeat(long, lat) {
   getPoints(long, lat)
   .then(function(mapPoints) {
-    console.log('About to create heatmap')
+    console.log('About to create heatmap');
     heatmap = new google.maps.visualization.HeatmapLayer({
       data: mapPoints,
-      map: map
+      map: map,
     });
-  })
+  });
 }
 
 /*===============================
