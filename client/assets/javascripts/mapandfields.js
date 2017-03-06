@@ -57,6 +57,8 @@ function initMap() {
     center: {lat: 37.775, lng: -122.434},
     mapTypeId: 'roadmap',
   });
+  // angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().map = map;
+
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.

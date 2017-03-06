@@ -10,6 +10,7 @@ angular.module('app.controllers', [])
   $scope.destinationCoords = {};
   $scope.originVicinity = '';
   $scope.destinationVicinity = '';
+  $scope.infoWindow = '';
 
   $scope.renderRoute = (points) => {
     const safeRoute = new google.maps.Polyline({
@@ -43,8 +44,8 @@ angular.module('app.controllers', [])
       //Determine the auto generated start location
       addressDataJSON.results[0].address_components.forEach((addressData) => {
         if (addressData.types[0] === 'locality' || addressData.types[1] === 'locality') {
-          $scope.pos = originVicinity;
-          console.log('Found it!', locality);
+          $scope.pos = addressData.long_name;
+          console.log('locality is!', addressData.long_name);
         }
       });
 
@@ -72,6 +73,12 @@ angular.module('app.controllers', [])
     if (mobile) {
       locationURL += (`&mobile=${mobile}`);
     }
+
+    const midLat = ($scope.originCoords.lat + $scope.destinationCoords.lat) / 2;
+    const midLng = ($scope.originCoords.lng + $scope.destinationCoords.lng) / 2;
+    const newCenter = { lat: midLat, lng: midLng };
+    map.setCenter(newCenter);
+    
 
     fetch(locationURL)
     .then(route => route.json())
