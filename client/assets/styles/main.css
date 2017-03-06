@@ -187,3 +187,11 @@ a:active {
     background-position:350px;
   }
 }
+
+.form-error{
+  background: #ECC9C6;
+  border: 3px solid #B4676D;
+  font-size: 16px;
+  color: #9C1110;
+  margin: 2% 5% 0 5%;
+}

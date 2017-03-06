@@ -10,7 +10,6 @@ angular.module('app.controllers', [])
   $scope.destinationCoords = {};
   $scope.originVicinity = '';
   $scope.destinationVicinity = '';
-  $scope.infoWindow = '';
 
   $scope.renderRoute = (points) => {
     const safeRoute = new google.maps.Polyline({
@@ -30,6 +29,14 @@ angular.module('app.controllers', [])
 
   $scope.editHandler = () => {
     $scope.showOriginField = !$scope.showOriginField;
+  };
+
+  $scope.validLocation = (locationType) => {
+    if (locationType === 'origin') {
+      return $scope.originVicinity === 'San Francisco';
+    } else {
+      return $scope.destinationVicinity === 'San Francisco' || $scope.destinationVicinity === '';
+    }
   };
 
   $scope.setPos = (currentPosition) => {

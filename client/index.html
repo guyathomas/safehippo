@@ -52,8 +52,13 @@
               <div class="dirInput">
                 <!-- Current Location from -->
                 <input type="text" name="origin" placeholder="Origin" class='directions-field' ng-model='origin' ng-show='showOriginField' id="origin-field" ng-change="originCoords={}">
-                <div class="invalid">The origin must be SF</div>
+                <div class="form-error" ng-show="!validLocation('origin')">
+                  Origin must be in San Fran
+                </div> 
                 <input type="text" name="destination" placeholder="Destination" class='directions-field-bottom' ng-model='destination' id="destination-field" ng-change="destinationCoords={}">
+                <div class="form-error" ng-show="!validLocation('destination')">
+                  Destination must be in San Fran
+                </div> 
                 <input type="tel" name="mobile" placeholder="Mobile" class='directions-field-bottom' ng-model='mobile'>
               </div>
               <input type="submit" value="Go" class='directions-field-submit'>

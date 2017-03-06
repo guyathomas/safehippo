@@ -32,6 +32,7 @@ function initAutocomplete() {
   scope.destinationVicinity = place.vicinity;
   scope.destinationCoords.lat = place.geometry.location.lat();
   scope.destinationCoords.lng = place.geometry.location.lng();
+  scope.$apply();
 };
 
  function setOrigin() {
@@ -39,13 +40,9 @@ function initAutocomplete() {
   var scope = angular.element(document.querySelector('[ng-controller="ViewController"]')).scope();
 
   scope.originVicinity = place.vicinity;
-
-  if (scope.originVicinity != 'San Francisco') {
-    console.log('Origin vicinity is not SF')
-  }
-  console.log('place.geometry.location', place)
   scope.originCoords.lat = place.geometry.location.lat();
   scope.originCoords.lng = place.geometry.location.lng();
+  scope.$apply();
 };
 
 
@@ -57,8 +54,6 @@ function initMap() {
     center: {lat: 37.775, lng: -122.434},
     mapTypeId: 'roadmap',
   });
-  // angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().map = map;
-
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
@@ -68,13 +63,6 @@ function initMap() {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-
-      // var circle = new google.maps.Circle({
-      //   center: pos,
-      //   radius: position.coords.accuracy,
-      // });
-      // origin.setBounds(circle.getBounds());
-      // destination.setBounds(circle.getBounds());
 
       angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().setPos(pos);
       angular.element(document.querySelector('[ng-controller="ViewController"]')).scope().originCoords = pos;
